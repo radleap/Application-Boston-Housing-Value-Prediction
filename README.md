@@ -4,7 +4,6 @@
 
 ## Machine Learning Project: Boston Housing Median House Value Prediction
 
-
 ![Boston Housing Image][image1]
 
 ## General Project Details
