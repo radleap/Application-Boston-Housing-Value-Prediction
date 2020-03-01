@@ -69,26 +69,14 @@
     <div class="col-sm-8 text-left">
       <h1>Boston Housing Home Prediction?</h1>
 
-	<h3>Input data and submit to predict the median housing value!</h3>
+	<h3>Here is the prediction and a where it compares in this visual to our original sample data. Going to sell?</h3>
       <hr>
 
-      <div class="user_input_forms">
-
-           <!-- Main Input For Receiving Query to our ML -->
-          <form action="{{ url_for('predict')}}"method="post">
-          	  <input type="number" name="CRIM" placeholder="Input CRIM value" required="required" />
-              <input type="number" name="NOX" placeholder="Input NOX value" step="0.01" required="required" />
-      		    <input type="number" name="RM" placeholder="Input RM value" required="required" />
-
-          <hr>
-              <button type="submit" class="btn btn-primary btn-block btn-small">Predict</button>
-          </form>
-
-       </div>
 		<br>
     <br>
     {{ prediction_text }}
-
-
+    <br>
+    <hr>
+<img class="img-responsive" img src = "/plot.png" alt="my plot">
 </body>
 </html>
