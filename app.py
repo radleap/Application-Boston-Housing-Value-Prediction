@@ -9,7 +9,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 app = Flask(__name__)
-model = pickle.load(open('model.pkl', 'rb'))
+model = pickle.load(open('static/artifacts/model.pkl', 'rb'))
 
 # loading original dataset for use in plotting
 with open('static/dataset.pkl', 'rb') as file:
@@ -50,9 +50,14 @@ def predict():
     prediction = model.predict(final_features)
     plot_png(prediction)
     output_prediction = round(prediction[0], 2)*1000 #to put in thousands of dollars
+
+    if output_prediction >= 0:
+        output_prediction = round(prediction[0], 2)*1000
+    else:
+        output_prediction = 0
     #plot = create_figure(float(prediction))
     #plot2 = makeimgdata(plot)
-    return render_template('output.html', prediction_text='Median Housing Value should be $ {}'.format(output_prediction)) #, prediction_image = plot2)
+    return render_template('output.html', prediction_text='The predicted median housing value is $ {}'.format(output_prediction)) #, prediction_image = plot2)
 
 # https://stackoverflow.com/questions/50728328/python-how-to-show-matplotlib-in-flask
 #needed to set the xlim to fix a bug but ok, could not reroute the prediction out before visual page loaded

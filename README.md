@@ -1,10 +1,14 @@
 ﻿[//]: # (Image References)
 
-[image1]: ./images/BostonHousingImage.PNG "Boston Housing Image"
+[image1]: ./static/images/BostonHousingPic.JPG "Boston Housing Image"
 
 ## Machine Learning Project: Boston Housing Median House Value Prediction
 
 ![Boston Housing Image][image1]
+
+## Deployment Details
+
+The project is actively deployed on Heroku at the following link: https://boston-housing-data-prediction.herokuapp.com/
 
 ## General Project Details
 
@@ -17,19 +21,16 @@ Evaluation Metrics: Evaluation metrics will be using r-squared for this regressi
 See the requirements.txt file for necessary packages. 
 
 ## Data
-See directories "images" for supporting data.
+See directories "static/images" for supporting data.
 
 ## Outputs
 
-The jupyter notebook will house all data and outputs.
+The jupyter notebook will house all data, and contain code for creating all model outputs.
+The "app.py" file contains the flask application code, using the HTML templates, saved models, and stored (pickled) data.
 
 ## Motivation
   
 Fun project to practice various machine learning algorithms.
-
-## General Deployment Details
-
-TBD
 
 ## License
 ### The MIT License (MIT)
