@@ -47,6 +47,14 @@ def predict():
     #taking the function input and using model to predict
     int_features = [float(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
+
+    # extracting and preparing our categorical variable RAD, so it matches required model input of shape 15 encoded
+    rad_list = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0 ,8.0 ,24.0] # possible values
+    match = final_features[-1][-1] #taking RAD user input only
+    rad_user = [1.0 if i==match else 0.0 for i in rad_list] # recreating list with 1.0 where true, else 0
+    final_features = list(final_features[-1][:-1]) + rad_user #removing rad, then combining rad categorical options
+    final_features = np.asarray(final_features).reshape(1, -1) # reshaping
+
     prediction = model.predict(final_features)
     plot_png(prediction)
     output_prediction = round(prediction[0], 2)*1000 #to put in thousands of dollars
