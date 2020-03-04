@@ -1,5 +1,6 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template,Response
+from sklearn.preprocessing import StandardScaler
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pickle
@@ -10,8 +11,9 @@ from matplotlib.figure import Figure
 
 app = Flask(__name__)
 model = pickle.load(open('static/artifacts/model.pkl', 'rb'))
+scaler_f =  pickle.load(open('static/artifacts/std_scaler_final_model.pkl', 'rb')) #unstable, not work
 
-# loading original dataset for use in plotting
+# loading original dataset for use in plotting visual
 with open('static/dataset.pkl', 'rb') as file:
     original_data = pickle.load(file)
 
@@ -49,11 +51,23 @@ def predict():
     final_features = [np.array(int_features)]
 
     # extracting and preparing our categorical variable RAD, so it matches required model input of shape 15 encoded
+    # log(CRIM) NOX RM lg(DIS) PTRATIO log(B LSTAT RAD - only RAD is categorical
     rad_list = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0 ,8.0 ,24.0] # possible values
     match = final_features[-1][-1] #taking RAD user input only
     rad_user = [1.0 if i==match else 0.0 for i in rad_list] # recreating list with 1.0 where true, else 0
-    final_features = list(final_features[-1][:-1]) + rad_user #removing rad, then combining rad categorical options
-    final_features = np.asarray(final_features).reshape(1, -1) # reshaping
+
+    # applying log transformations to CRIM, DIS and B, pverwriting in place
+    final_features = list(final_features[-1][:-1])
+    final_features[0] = np.log(final_features[0]) #log applied to CRIM, position 0
+    final_features[3] = np.log(final_features[3]) #log applied to DIS, position 3
+    final_features[5] = np.log(final_features[5]) #log applied to B, position 5
+
+    # applying the saved/loaded StandardScaler object to the new continuous,logged data
+    final_features = scaler_f.transform(np.asarray(final_features).reshape(1, -1)) #returns non-list, need to correct
+
+    final_features = final_features.tolist()[0] + rad_user #recreating the list, getting correct format, and combining
+
+    final_features = np.asarray(final_features).reshape(1, -1) # reshaping for prediction object requirements, back to array
 
     prediction = model.predict(final_features)
     plot_png(prediction)
@@ -63,11 +77,8 @@ def predict():
         output_prediction = round(prediction[0], 2)*1000
     else:
         output_prediction = 0
-    #plot = create_figure(float(prediction))
-    #plot2 = makeimgdata(plot)
     return render_template('output.html', prediction_text='The predicted median housing value is $ {}'.format(output_prediction)) #, prediction_image = plot2)
 
-# https://stackoverflow.com/questions/50728328/python-how-to-show-matplotlib-in-flask
 #needed to set the xlim to fix a bug but ok, could not reroute the prediction out before visual page loaded
 
 @app.route('/about', methods=['GET', 'POST'])

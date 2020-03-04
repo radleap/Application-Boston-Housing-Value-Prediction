@@ -31,6 +31,7 @@ The "app.py" file contains the flask application code, using the HTML templates,
 ## Motivation
   
 Fun project to practice various machine learning algorithms.
+This video was very helpful in developing this application: https://www.youtube.com/watch?v=mrExsjcvF4o&list=PLZoTAELRMXVOAvUbePX1lTdxQR8EY35Z1&index=2
 
 ## License
 ### The MIT License (MIT)
