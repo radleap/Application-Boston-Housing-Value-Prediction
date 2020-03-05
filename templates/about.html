@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Multilinear Regression Boston Housing Application</title>
+  <title>Decision Tree Regressor - Boston Housing Application</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -51,13 +51,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Multilinear Regression</a>
+      <a class="navbar-brand" href="#">Decision Tree Regressor</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href='/'>Home</a></li>
         <li><a href='/about'>About</a></li>
-        <li><a href="https://github.com/radleap/Machine-Learning-Boston-Housing-Value-Prediction">Github</a></li>
+        <li><a href="https://github.com/radleap/Application-Boston-Housing-Value-Prediction">Github</a></li>
         <li><a href="https://www.linkedin.com/in/benjamin-jacobson-29540559/">Contact</a></li>
       </ul>
     </div>
@@ -67,13 +67,32 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-8 text-left">
-      <h1>About the Boston Housing Data Application</h1>
+      <h1>About This Application</h1>
       <hr>
-      <p>Currently, a simple multi-regression model is deployed, taking 3 inputs. The output is a single prediction of the median home value.</p>
-      <p>The application makes use of Heroku, an open source PaaS, with a Bootstrap framework. The CSS and HTML was customized for simplicity, but maintain the connectivity between the various components. This is our scaffolding, with all documents maintained on Github.</p>
+      <h3>The Application</h3>
+      <p>
+        The application makes use of Heroku, an open source PaaS, with a Bootstrap framework. The CSS and HTML were customized for simplicity, but maintain the connectivity between the various components (using Flask). All documents are maintained on Github (see link above).</p>
+      <p>In order for the flask application to work, we needed to provide the (1) model, our Decision Tree Regressor, (2) the fitted StandardScaler and (3) supporting data to the application. These needed to be compiled and used. The specific python packages that were used in code development in the jupyter notebook (on GitHub, see above), are also provided in <b>requirement.txt</b> for the Heroku application to use.</p>
+      <p>The directory layout includes <b>Templates</b> and <b>Static</b>, with these key files  <b>procfile</b> and <b>app.py</b>. The templates directory contains the HTML framework for each site, and the appropriate code to interact with the app.py (which loads data, model artifacts, transforms data using python, predicts, and renders/returns the site as designed.) The Static directory contains statics files, images, models, and data used in the application or elsewhere. Procfile is a supporting file instructing Heroku which application (here app.py) to use. All are uploaded to Heroku in which this application is hosted.</P>
+<h3>Data Science Workflow</h3>
+<p>The general steps for the Data Science Workflow is listed below, and was <u>iterative</u> in nature, as more was learned throughout the process. In GitHub (see link above), the jupyter notebook shows all code, object creation, and fully discusses this project.</p>
+<p>
+  <b><ol type="I">
+  <li>Retrieve Data</li>
+  <li>Exploratory Data Analysis: Clean & Explore</li>
+  <li>Prepare & Transform</li>
+  <li>Develop & Train Model(s)</li>
+  <li>Validate & Evaluate Results</li>
+  <li>Deployment & Objects</li>
+</ol></b>
+</p>
+<p> The final model chosen needed to generalize well to unseen data. Even though the earlier models performed well on the training data (accuracy ~95%), the test accuracy was much lower (50%). This indicates overfitting and poor generalization, i.e. our new prediction in the application would not be that great.</p>
+<p> So, the final model chosen was a Decision Tree Regression, trained using cross-validation and grid searching of hyperparameters. This resulted in a lower training accuracy of 81.5% but a much closer (and higher) test accuracy of 77.2%. The closeness, ~5% indicates that the model is generalizing well to unseen data. As a result, the best estimator was used, saved, and deployed. Further improvement and next steps is discussed in the jupyter notebook.</p>
 
 <hr>
-      <h3>Thank you and hope you enjoyed!</h3>
+      <h3>Thank you!</h3>
+<br>
+<br>
     </div>
   </div>
 </div>

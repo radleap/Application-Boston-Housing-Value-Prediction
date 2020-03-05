@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Multilinear Regression Boston Housing Application</title>
+  <title>Decision Tree Regressor - Boston Housing Application</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -51,13 +51,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">MultiLinear Regression</a>
+      <a class="navbar-brand" href="#">Decision Tree Regressor</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="https://boston-housing-data-prediction.herokuapp.com/">Home</a></li>
         <li><a href='/about'>About</a></li>
-        <li><a href="https://github.com/radleap/Machine-Learning-Boston-Housing-Value-Prediction">Github</a></li>
+        <li><a href="https://github.com/radleap/Application-Boston-Housing-Value-Prediction">Github</a></li>
         <li><a href="https://www.linkedin.com/in/benjamin-jacobson-29540559/">Contact</a></li>
       </ul>
     </div>
@@ -67,10 +67,15 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-8 text-left">
-      <h1>Boston Housing Home Prediction</h1>
-
-	<h3>Input data and submit to predict the median housing value.</h3>
+      <h1>Boston Housing Median Home Value Prediction</h1>
       <hr>
+	<p>Input data and submit to predict the median housing value.
+    For the range of acceptable values, see the input boxes, and see below for the definition of each variable.
+    For more information about the model, application, and data science approach, see the About page.
+  </p>
+      <hr>
+      <p>
+      </p>
 
       <div class="user_input_forms">
 
@@ -88,7 +93,19 @@
           <hr>
               <button type="submit" class="btn btn-primary btn-block btn-small">Predict</button>
           </form>
-
+          <hr>
+          <p><b> Feature Definitions: </b>
+            <ul>
+      <li>CRIM - per capita crime rate by town</li>
+      <li>NOX - nitric oxides concentration (parts per 10 million)</li>
+      <li>RM - average number of rooms per dwelling</li>
+      <li>DIS - weighted distances to five Boston employment centres</li>
+      <li>PTRATIO - pupil-teacher ratio by town</li>
+      <li>B - 1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town</li>
+      <li>LSTAT - % lower status of the population</li>
+      <li>RAD - index of accessibility to radial highways</li>
+    </ul>
+          </p>
        </div>
 		<br>
     <br>
